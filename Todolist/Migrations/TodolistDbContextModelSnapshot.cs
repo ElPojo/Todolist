@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Todolist.Models;
 
 namespace Todolist.Migrations
 {
-    [DbContext(typeof(ItemlistDbContext))]
-    [Migration("20181106143309_1st")]
-    partial class _1st
+    [DbContext(typeof(TodolistDbContext))]
+    partial class TodolistDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,35 +29,15 @@ namespace Todolist.Migrations
 
                     b.Property<bool>("Erledigt");
 
-                    b.Property<int?>("ItemlistId");
-
-                    b.Property<int>("Priorität");
+                    b.Property<int>("Prioritaet");
 
                     b.Property<bool>("Verschoben");
 
+                    b.Property<DateTime>("Zeitpunkt");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ItemlistId");
-
                     b.ToTable("Item");
-                });
-
-            modelBuilder.Entity("Todolist.Models.Itemlist", b =>
-                {
-                    b.Property<int>("ItemlistId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("ItemlistId");
-
-                    b.ToTable("Itemlist");
-                });
-
-            modelBuilder.Entity("Todolist.Models.Item", b =>
-                {
-                    b.HasOne("Todolist.Models.Itemlist")
-                        .WithMany("Items")
-                        .HasForeignKey("ItemlistId");
                 });
 #pragma warning restore 612, 618
         }
