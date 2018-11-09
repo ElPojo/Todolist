@@ -44,7 +44,7 @@ namespace Todolist.Controllers
 
 			_context.Item.Add (item);
 			await _context.SaveChangesAsync ();
-			return CreatedAtAction ("PostItem", new { id = item.Id }, item);
+			return CreatedAtAction ("PostTask", new { id = item.Id }, item);
 
 		}
 
