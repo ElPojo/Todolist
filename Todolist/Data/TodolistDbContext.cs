@@ -13,6 +13,6 @@ namespace Todolist.Models
         {
         }
 
-        public DbSet<Todolist.Models.Item> Item { get; set; }
+        public DbSet<Todolist.Models.Item> Items { get; set; }
     }
 }

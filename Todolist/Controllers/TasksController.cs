@@ -19,14 +19,14 @@ namespace Todolist.Controllers
 
 		// GET: api/Tasks
 		[HttpGet]
-		public IEnumerable<Item> GetAllTasks () => _context.Item;
+		public IEnumerable<Item> GetAllTasks () => _context.Items;
 
 
 		// GET: api/Tasks/5
 		[HttpGet ("{id}")]
 		public async Task<IActionResult> GetTask ([FromRoute] int id)
 		{
-			var item = await _context.Item.FirstOrDefaultAsync (x => x.Id == id);
+			var item = await _context.Items.FirstOrDefaultAsync (x => x.Id == id);
 
 			if (item == null)
 				return NotFound ();
@@ -42,7 +42,7 @@ namespace Todolist.Controllers
 			if (!ModelState.IsValid)
 				return BadRequest (ModelState);
 
-			_context.Item.Add (item);
+			_context.Items.Add (item);
 			await _context.SaveChangesAsync ();
 			return CreatedAtAction ("PostTask", new { id = item.Id }, item);
 
@@ -54,8 +54,8 @@ namespace Todolist.Controllers
 		public async Task<IActionResult> DeleteAllTasks ([FromRoute] string Name)
 		{
 
-			foreach (Item item in _context.Item)
-				_context.Item.Remove (item);
+			foreach (Item item in _context.Items)
+				_context.Items.Remove (item);
 
 
 			await _context.SaveChangesAsync ();
@@ -68,12 +68,12 @@ namespace Todolist.Controllers
 		[HttpDelete ("{id}")]
 		public async Task<IActionResult> DeleteTask ([FromRoute] int id)
 		{
-			var item = await _context.Item.FirstOrDefaultAsync (x => x.Id == id);
+			var item = await _context.Items.FirstOrDefaultAsync (x => x.Id == id);
 
 			if (item == null)
 				return NotFound ();
 
-			_context.Item.Remove (item);
+			_context.Items.Remove (item);
 			await _context.SaveChangesAsync ();
 			return Ok (item);
 
